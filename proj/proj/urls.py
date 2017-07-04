@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from . import login as tan90_login
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^do_login/', tan90_login.do_login),
+    url(r'^do_loginout/', tan90_login.do_logout),
+    url(r'^do_register', tan90_login.do_register),
 ]
