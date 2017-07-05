@@ -40,6 +40,7 @@ class tan90_category(models.Model):
 
 class tan90_chapter(models.Model):
     name = models.CharField(max_length=20)
+    index = models.SmallIntegerField()
     course = models.ForeignKey('tan90_course', on_delete=models.CASCADE)
 
 class tan90_video(models.Model):
@@ -95,3 +96,12 @@ class tan90_notice(models.Model):
     title = models.CharField(max_length=20)
     content = models.CharField(max_length=512)
     poster = models.ForeignKey('tan90_user', on_delete=models.CASCADE)
+
+class tan90_face(models.Model):
+    face = models.ImageField(upload_to='face')
+    user = models.OneToOneField('tan90_user')
+
+class tan90_cover(models.Model):
+    cover = models.ImageField(upload_to='cover')
+    course = models.ForeignKey('tan90_course', on_delete=models.CASCADE)
+

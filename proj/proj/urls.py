@@ -16,10 +16,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from . import login as tan90_login
+from . import course_manage as tan90_course_manage
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^do_login/', tan90_login.do_login),
-    url(r'^do_loginout/', tan90_login.do_logout),
-    url(r'^do_register', tan90_login.do_register),
+    url(r'^do_logout/', tan90_login.do_logout),
+    url(r'^do_register/', tan90_login.do_register),
+    url(r'^get_category/', tan90_course_manage.get_category),
+    url(r'^add_category/', tan90_course_manage.add_category),
+    url(r'^del_category/', tan90_course_manage.del_category),
+    url(r'^add_course/', tan90_course_manage.add_course),
+    url(r'^delete_course/', tan90_course_manage.del_course),
 ]
