@@ -28,4 +28,6 @@ urlpatterns = [
     url(r'^del_category/', tan90_course_manage.del_category),
     url(r'^add_course/', tan90_course_manage.add_course),
     url(r'^delete_course/', tan90_course_manage.del_course),
+    url(r'^get_all_courses/', tan90_course_manage.get_all_courses),
+    url(r'^add_course_cover/', tan90_course_manage.add_course_cover),
 ]

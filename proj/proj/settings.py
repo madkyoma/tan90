@@ -37,8 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'proj'
+    'corsheaders',
+    'proj',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,6 +53,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'proj.urls'
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
     {

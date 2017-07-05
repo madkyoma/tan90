@@ -7,8 +7,8 @@ import json
 def get_category(request):
     try:
         cat = models.tan90_category.objects.all()
-        limit = request.POST.get('limit', 20)
-        page_index = request.POST.get('page', 1)
+        limit = int(request.POST.get('limit', 20))
+        page_index = int(request.POST.get('page', 1))
         p = Paginator(cat, limit)
         res = []
         try:
@@ -126,10 +126,55 @@ def del_course(request):
         print(e)
         return HttpResponse(json.dumps({'code': '4000', 'msg': 'serve error'}))
 
+def get_all_courses(request):
+    try:
+        user_id = request.POST.get('id')
+        if not user_id:
+            return HttpResponse(json.dumps({'code':'1001', 'msg':'not login'}))
+        user = models.tan90_user.objects.get(id=user_id)
+        if not user.admin:
+            return HttpResponse(json.dumps({'code':'1002', 'msg':'not admin'}))
+
+        courses = models.tan90_course.objects.all()
+        limit = int(request.POST.get('limit', 20))
+        page_index = int(request.POST.get('page', 1))
+        p = Paginator(courses, limit)
+        page = []
+        try:
+            page = list(p.page(page_index))
+        except BaseException as e:
+            print(e)
+        return HttpResponse(json.dumps({'code':'1000', 'msg':'ok', 'page_cnt':p.count, 'courses':page}))
+    except BaseException as e:
+        print(e)
+        return HttpResponse(json.dumps({'code':'4000', 'msg':'serve error'}))
+
+def add_course_cover(request):
+    try:
+        user_id = request.session.get('id')
+        if not user_id:
+            return HttpResponse(json.dumps({'code':'1001', 'msg':'not login'}))
+        user = models.tan90_user.objects.get(id=user_id)
+        if not user.admin:
+            return HttpResponse(json.dump({'code':'1002', 'msg':'not admin'}))
+
+        course_name = request.POST.get('course_name')
+        course = models.tan90_course.objects.get(name=course_name)
+
+        cover_img = request.FILES['cover']
+        cover = models.tan90_cover()
+        cover.cover = cover_img
+        cover.course = course
+        cover.save()
+    except BaseException as e:
+        print(e)
+        return HttpResponse(json.dumps({'code':'4000', 'msg':'ok'}))
+
+def add_chapter(request):
+    pass
 
 def add_video(request):
     pass
-
 
 def add_pdf(request):
     pass
