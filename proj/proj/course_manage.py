@@ -141,7 +141,7 @@ def get_all_courses(request):
         p = Paginator(courses, limit)
         page = []
         try:
-            page = list(p.page(page_index))
+            page = list(p.page(page_index).object_list)
         except BaseException as e:
             print(e)
         return HttpResponse(json.dumps({'code':'1000', 'msg':'ok', 'page_cnt':p.count, 'courses':page}))

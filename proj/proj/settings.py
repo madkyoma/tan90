@@ -25,7 +25,7 @@ SECRET_KEY = '8_r9772yu5vl1gy@)t3))edf_*sh2#j6&m-fg9fpvh_%6gc9-@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['115.159.188.200']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     #'django.middleware.csrf.CsrfViewMiddleware',
